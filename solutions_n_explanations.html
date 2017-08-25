@@ -11767,7 +11767,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
@@ -12083,7 +12083,17 @@ This took 0.12500000 seconds
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Explanation:">Explanation:<a class="anchor-link" href="#Explanation:">&#182;</a></h2><p>My choice of the data structure to solve this question was list, which was treated as indexed array. The python built-in function, list() allowed to convert each character of a string to each element of a list. And each element of anagram (t) list was iterated in the for-loop and then was searched if the element appears in the subject (s) list in the if-statement. Therefore, the time efficiency and space complexity of worst case would be O(len(t) + len(s)). The output was generated only one time. So the O notation would be <strong>O(len(t) + len(s) + 1)</strong>.</p>
+<h2 id="Explanation:">Explanation:<a class="anchor-link" href="#Explanation:">&#182;</a></h2><p>My choice of the data structure to solve this question is list, which was treated as indexed array.</p>
+<h3 id="Space-complexity:">Space complexity:<a class="anchor-link" href="#Space-complexity:">&#182;</a></h3><ol>
+<li>for some odd cases, the main procedure returns error message. It does not need to go through the rest of codes; O(1)</li>
+<li>'is_anagram' procedure creates 's_list' and 't_list'. s_list takes space of the length (S) of 's' and 't_list' takes space of the length (T) of 't';O(S) + O(T)</li>
+</ol>
+<p>Overall, the space complexity of the worst case would be O(S+T).</p>
+<h3 id="Time-efficiency:">Time efficiency:<a class="anchor-link" href="#Time-efficiency:">&#182;</a></h3><ol>
+<li>the main procedure does not have any iteration; O(1)</li>
+<li>"is_anagram" procedure has array.lower function, list(array) function, and for-loop. The functions would rely on the input lengths (S and T). The two functions take O(S) time and O(T) time of each and the for-loop takes O(T) time; O(2S) + O(3T)</li>
+</ol>
+<p>Overall, the time complexity of the worst case would be O(2S+3T).</p>
 <hr>
 <h1 id="Question-2.">Question 2.<a class="anchor-link" href="#Question-2.">&#182;</a></h1><p>Given a string a, find the longest palindromic substring contained in a. Your function definition should look like question2(a), and return a string.</p>
 <h2 id="Understand-the-Question:">Understand the Question:<a class="anchor-link" href="#Understand-the-Question:">&#182;</a></h2><p><a href="https://en.wikipedia.org/wiki/Palindrome">A palindrome</a> is a word, phrase, number, or other sequence of characters which reads the same backward as forward, such as madam or racecar. And the question is to answer longest palindromic substring. For example, the procedure with the input of 'ababa' will return 'ababa', not 'aba'.</p>
@@ -12418,7 +12428,17 @@ This took 229.60400009 seconds
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Explanation:">Explanation:<a class="anchor-link" href="#Explanation:">&#182;</a></h2><p>My choice of the data structure to solve this question was string, which was treated as indexed array. The input string was manipulated using index system to create sub-string and sort reversely. I used two for-loops to iterate every possible substring and each loop will consume len(a) times or n times of time and space. The output was created as emtpy string first, updated each time iteration, and returned at the end of the procedure. The time efficiency and space complexity of worst case would be <strong>O(n<sup>2</sup> + 3)</strong>.</p>
+<h2 id="Explanation:">Explanation:<a class="anchor-link" href="#Explanation:">&#182;</a></h2><p>My choice of the data structure to solve this question was string, which was treated as indexed array. The input string was manipulated using index system to create sub-string and sort reversely.</p>
+<h3 id="Space-complexity:">Space complexity:<a class="anchor-link" href="#Space-complexity:">&#182;</a></h3><ol>
+<li>for some odd cases, the main procedure returns error message. It does not need to go through the rest of codes; O(1)</li>
+<li>'longest_palindrome' procedure creates 'longest' and 'substring', which both take space of the length (A) of 'a'; O(2A)</li>
+</ol>
+<p>Overall, the space complexity of the worst case would be O(2A).</p>
+<h3 id="Time-efficiency:">Time efficiency:<a class="anchor-link" href="#Time-efficiency:">&#182;</a></h3><ol>
+<li>the main procedure does not have any iteration, but creates one output; O(1)</li>
+<li>"longest_palindrome" procedure has array.lower function and two for-loops. The function takes O(A) time and the for-loops take O(A<sup>2</sup>) time.</li>
+</ol>
+<p>Overall, the time complexity of the worst case would be O(A<sup>2</sup> + A).</p>
 <hr>
 <h1 id="Question-3.">Question 3.<a class="anchor-link" href="#Question-3.">&#182;</a></h1><p>Given an undirected graph G, find the minimum spanning tree within G. A minimum spanning tree connects all vertices in a graph with the smallest possible total weight of edges. Your function should take in and return an adjacency list structured like this:</p>
 <blockquote><p>{'A': [('B', 2)],</p>
@@ -12789,13 +12809,34 @@ This took 0.00199986 seconds
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Explanation:">Explanation:<a class="anchor-link" href="#Explanation:">&#182;</a></h2><p>My choices of the data structure to solve this question were dictionaries and lists, which were treated as indexed array.</p>
-<p>Time efficiency and space complexity of each step:</p>
-<p>(G is graph input; V is vertices; E is edges)</p>
-<ol>
-<li>initialize disjoint sets, containing one for-loop; O(len(V))</li>
-<li>get list of unique edges, containing two for-loops; O(len(V)*len(E))</li>
-<li>find and compare roots of vertex1 and vertex2, containing one for-loop; O(len(E))</li>
+<p>graph (G) has V number of vertices and E number of edges</p>
+<h3 id="Space-complexity:">Space complexity:<a class="anchor-link" href="#Space-complexity:">&#182;</a></h3><ol>
+<li>two global dictionaries are created; O(2)</li>
+<li>for some odd cases, it returns error message. It does not need to go through the rest of codes; O(1)</li>
+<li>for other cases, the main procedure creates three lists including 'vertices', 'edges', and 'MST', and one dictionary 'output'. <ul>
+<li>'vertices'; O(V)</li>
+<li>'edges'; O(E)</li>
+<li>'MST'; O(E)</li>
+<li>'output'; O(V)*O(E)</li>
+</ul>
+</li>
+<li>step1 in the main procedure creates elements for 'parent' and 'rank' lists; O(2V)</li>
+<li>'find_root' and 'union' procedures do not create new variables.</li>
 </ol>
+<p>Overall, the space complexity of the worst case would be O(V*E + 3V + 2E).</p>
+<h3 id="Time-efficiency:">Time efficiency:<a class="anchor-link" href="#Time-efficiency:">&#182;</a></h3><ol>
+<li>the main procedure has dictionary.keys() function, sorted(array) function, three single for-loops and one double for-loops. <ul>
+<li>dictionary.keys() function; O(V)</li>
+<li>sorted(array) function; O(E)</li>
+<li>1st for-loop; O(V)</li>
+<li>double for-loops; O(V<sup>2</sup>)</li>
+<li>2nd for-loop; O(E)</li>
+<li>3rd for-loop; length of 'MST' which is related to O(E)</li>
+</ul>
+</li>
+<li>'find_root' and 'union' procedures do not include iterations.</li>
+</ol>
+<p>Overall, the time complexity of the worst case would be O(V<sup>2</sup> + 2V + 3E).</p>
 <hr>
 <h1 id="Question-4.">Question 4.<a class="anchor-link" href="#Question-4.">&#182;</a></h1><p>Find the least common ancestor between two nodes on a binary search tree. The least common ancestor is the farthest node from the root that is an ancestor of both nodes. For example, the root is a common ancestor of all nodes on the tree, but if both nodes are descendents of the root's left child, then that left child might be the lowest common ancestor. You can assume that both nodes are in the tree, and the tree itself adheres to all BST properties. The function definition should look like question4(T, r, n1, n2), where T is the tree represented as a matrix, where the index of the list is equal to the integer stored in that node and a 1 represents a child node, r is a non-negative integer representing the root, and n1 and n2 are non-negative integers representing the two nodes in no particular order. For example, one test case might be</p>
 <blockquote><p>question4(</p>
@@ -13228,13 +13269,21 @@ This took 0.00099993 seconds
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Explanation:">Explanation:<a class="anchor-link" href="#Explanation:">&#182;</a></h2><p>My choices of the data structure to solve this question was list, which were treated as indexed array.</p>
-<p>Time efficiency and space complexity of each step:</p>
-<ol>
-<li>get a parent, containing one for-loop; O(len(T))</li>
-<li>get list of parents, containing one while-loop; O(len(T))</li>
-<li>find a common parent between two lists, containing two for-loops; O(len(T)<sup>2</sup>)</li>
+<h2 id="Explanation:">Explanation:<a class="anchor-link" href="#Explanation:">&#182;</a></h2><p>My choices of the data structure to solve this question were 1D and 2D list, which were treated as indexed array.</p>
+<h3 id="Space-complexity:">Space complexity:<a class="anchor-link" href="#Space-complexity:">&#182;</a></h3><ol>
+<li>for some odd cases, it returns error message. It does not need to go through the rest of codes; O(1)</li>
+<li>'get_history' procedure creates and returns 'history' list, which takes space of the length (T) of children or tree; O(T)</li>
+<li>in 'get_parent' procedure, it returns 'i'; O(1)</li>
+<li>in 'common_ancestor' procedure, it returns 'n2_parent'; O(1)</li>
 </ol>
+<p>The constant space would not change with the input size, so the space complexity would only take account of 'get_history' procedure. In the main procedure, it creates two lists by using 'get_history'. Overall the space complexity of the worst case would be O(2T)</p>
+<h3 id="Time-efficiency:">Time efficiency:<a class="anchor-link" href="#Time-efficiency:">&#182;</a></h3><ol>
+<li>the main procedure does not have any iteration, but creates one output; O(1)</li>
+<li>'get_history' procedure contains one while-loop which takes O(T) time</li>
+<li>'get_parent' procedure contains one for-loop which takes O(T) time</li>
+<li>'common_ancestor' procedure contains double for-loops, which take O(T<sup>2</sup>) time</li>
+</ol>
+<p>Overall, the time complexity of the worst case would be O(T<sup>2</sup> + 2T).</p>
 <hr>
 <h1 id="Question-5.">Question 5.<a class="anchor-link" href="#Question-5.">&#182;</a></h1><p>Find the element in a singly linked list that's m elements from the end. For example, if a linked list has 5 elements, the 3rd element from the end is the 3rd element. The function definition should look like question5(ll, m), where ll is the first node of a linked list and m is the "mth number from the end". You should copy/paste the Node class below to use as a representation of a node in the linked list. Return the value of the node at that position.</p>
 <blockquote><p>class Node(object):</p>
@@ -13243,13 +13292,19 @@ This took 0.00099993 seconds
 <p>self.next = None</p>
 </blockquote>
 <h2 id="Understand-the-Question:">Understand the Question:<a class="anchor-link" href="#Understand-the-Question:">&#182;</a></h2><p><a href="https://www.cs.cmu.edu/~adamchik/15-121/lectures/Linked%20Lists/linked%20lists.html">A linked list</a> is a linear data structure where each element is a separate object. Each element (or node) of a list is comprising of two items - the data and a reference to the next node. The last node has a reference to null. The entry point into a linked list is called the head of the list.</p>
+<p>Some of odd cases such as empty list or null needs to be defined.</p>
+<ul>
+<li>return error if the ll argument is not Node.</li>
+<li>return error if the m argument is not a positive integer.</li>
+<li>return error if the m argument is greater than the total nodes.</li>
+</ul>
 <h2 id="Answer-Code:">Answer Code:<a class="anchor-link" href="#Answer-Code:">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># define class Node to create a linked list</span>
@@ -13280,7 +13335,14 @@ This took 0.00099993 seconds
     <span class="k">if</span> <span class="n">m</span> <span class="o">&gt;</span> <span class="n">count</span><span class="p">:</span>
         <span class="k">return</span> <span class="s2">&quot;Error: m is greater than the number of nodes in the list!&quot;</span>
     
-    <span class="k">return</span> <span class="n">count</span><span class="o">+</span><span class="mi">1</span><span class="o">-</span><span class="n">m</span> <span class="c1"># position of answer node</span>
+    <span class="c1"># find the data at the position</span>
+    <span class="n">pointer</span> <span class="o">=</span> <span class="n">ll</span>
+    <span class="n">position</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">position</span> <span class="o">!=</span> <span class="p">(</span><span class="n">count</span><span class="o">-</span><span class="n">m</span><span class="p">)):</span>
+        <span class="n">pointer</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">.</span><span class="n">next</span>
+        <span class="n">position</span> <span class="o">+=</span> <span class="mi">1</span>
+    
+    <span class="k">return</span> <span class="n">pointer</span><span class="o">.</span><span class="n">data</span>
         
 </pre></div>
 
@@ -13300,7 +13362,7 @@ This took 0.00099993 seconds
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">,</span> <span class="n">n4</span><span class="p">,</span> <span class="n">n5</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">Node</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">Node</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">Node</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">Node</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
@@ -13320,41 +13382,11 @@ This took 0.00099993 seconds
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[38]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[4]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
 <pre>3</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[39]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># when n2 is starting node, position 2 is expected</span>
-<span class="n">question5</span><span class="p">(</span><span class="n">n2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[39]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>2</pre>
 </div>
 
 </div>
@@ -13374,7 +13406,7 @@ This took 0.00099993 seconds
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># None node case</span>
@@ -13390,7 +13422,7 @@ This took 0.00099993 seconds
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[40]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[6]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -13405,7 +13437,7 @@ This took 0.00099993 seconds
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># m = 0</span>
@@ -13420,7 +13452,7 @@ This took 0.00099993 seconds
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[41]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[7]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -13435,7 +13467,7 @@ This took 0.00099993 seconds
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[42]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># m is greater than length of the list</span>
@@ -13450,7 +13482,7 @@ This took 0.00099993 seconds
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[42]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[8]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -13474,7 +13506,7 @@ This took 0.00099993 seconds
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
@@ -13523,7 +13555,20 @@ This took 0.00099993 seconds
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Explanation:">Explanation:<a class="anchor-link" href="#Explanation:">&#182;</a></h2><p>My choices of the data structure to solve this question was linked list, which store a key and next pointer. I have one while-loop to count the number of nodes in the linked list. So, the time efficiency and space complexity of worst case would be O(len(linked_list)).</p>
+<h2 id="Explanation:">Explanation:<a class="anchor-link" href="#Explanation:">&#182;</a></h2><p>My choice of the data structure to solve this question was a linked list, whose element stores a key and next pointer.</p>
+<h3 id="Space-complexity:">Space complexity:<a class="anchor-link" href="#Space-complexity:">&#182;</a></h3><ol>
+<li>each Node() takes two data spaces and whole linked list takes space of the number (N) of nodes; O(2N)</li>
+<li>in the procedure, for some odd cases, it returns error message. It does not need to go through the rest of codes; O(1)</li>
+<li>for other cases, it creates 'pointer' and 'count'. 'pointer' takes two data spaces and 'count' takes one space; O(3)</li>
+<li>at the step of finding data, it creates 'pointer' and 'position'; O(3)</li>
+<li>finally, it returns 'pointer.data'; O(1)</li>
+</ol>
+<p>Overall, all steps take constant space except the step creating a linked list, so the space complexity of the worst case would be O(2N). But question5 procedure itself will have constant space which does not change with the input size</p>
+<h3 id="Time-efficiency:">Time efficiency:<a class="anchor-link" href="#Time-efficiency:">&#182;</a></h3><ol>
+<li>each Node() takes O(1) time and so creating a tree takes O(N) time</li>
+<li>the main procedure has two while-loops. The first while-loop takes O(N) and the second while-loop takes O(N)</li>
+</ol>
+<p>Overall, the time complexity of the worst case would be O(N).</p>
 
 </div>
 </div>
