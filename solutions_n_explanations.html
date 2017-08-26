@@ -11755,7 +11755,7 @@ div#notebook {
 <h1 id="Practice-Overview">Practice Overview<a class="anchor-link" href="#Practice-Overview">&#182;</a></h1><p>For this practice, I will be given <a href="https://classroom.udacity.com/nanodegrees/nd002/parts/19280355-b835-4ce4-b867-2c2e2e85d0a0/modules/07cc5d99-f81d-45df-af3b-9206dca1739d/lessons/7736707697239847/concepts/78912813390923">five technical interviewing questions</a> on a variety of topics discussed in the technical interviewing course. I will write the answers using Python code, as well as the explanations of the efficiency of the code and the design choices.</p>
 <hr>
 <h1 id="Question-1.">Question 1.<a class="anchor-link" href="#Question-1.">&#182;</a></h1><p>Given two strings s and t, determine whether some anagram of t is a substring of s. For example: if s = "udacity" and t = "ad", then the function returns True. Your function definition should look like: question1(s, t) and return a boolean True or False.</p>
-<h2 id="Understand-the-Question:">Understand the Question:<a class="anchor-link" href="#Understand-the-Question:">&#182;</a></h2><p>A "anagram" means a word, phrase, or name formed by <strong>rearranging</strong> the letters of another, using all the original letters <strong>once</strong>. From the example of s = "udacity", the input of t = "aad" should return False because t uses "a" twice. But inputting s = "apple" and t = "pp" should return True because t uses original letters once.</p>
+<h2 id="Understand-the-Question:">Understand the Question:<a class="anchor-link" href="#Understand-the-Question:">&#182;</a></h2><p><a href="https://en.wikipedia.org/wiki/Anagram">A anagram</a> means a word, phrase, or name formed by <strong>rearranging</strong> the letters of another, using <strong>all</strong> the original letters <strong>exactly once</strong>. For example, "tyci" is an anagram of "city" since all letters of "udacity" were used exactly once. And then, the question is asking if an anagram of "city" is a substring of "udacity". For the solution code, first I can get all substrings with the length of t and then compare if the given string t is an anagram of any of the substring.</p>
 <p>Some of odd cases such as empty string or null needs to be defined to return error messages.</p>
 <ul>
 <li>return error if two arguments are not string.</li>
@@ -11767,32 +11767,27 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[70]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
 
-<span class="c1"># helper procedure to search character list of t in the character list of s and</span>
-<span class="c1"># if any character of t list is not in the s list, return False</span>
-<span class="k">def</span> <span class="nf">is_anagram</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<span class="c1"># helper procedure to compare the character lists of t1 and t2</span>
+<span class="k">def</span> <span class="nf">is_anagram</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">):</span>
     
     <span class="c1"># conver all characters to lower case</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">t1</span> <span class="o">=</span> <span class="n">t1</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">t2</span> <span class="o">=</span> <span class="n">t2</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
     
     <span class="c1"># convert string to list; each character of the string as element of the list</span>
-    <span class="n">s_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-    <span class="n">t_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">t1_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">t1</span><span class="p">)</span>
+    <span class="n">t2_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">t2</span><span class="p">)</span>
     
-    <span class="c1"># stop the loop and return False when any character of t is not shown in s</span>
-    <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">t_list</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">char</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">s_list</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">False</span>
-            <span class="k">break</span>
-        
-        <span class="n">s_list</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">char</span><span class="p">)</span> <span class="c1"># to prevent from using the same letter more than once, </span>
-                            <span class="c1"># remove the letter from the list</span>
-    <span class="k">return</span> <span class="bp">True</span>
+    <span class="c1"># sort the characters alphabetically</span>
+    <span class="n">t1_list</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="n">t2_list</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">t1_list</span> <span class="o">==</span> <span class="n">t2_list</span> <span class="c1"># True if the two lists are the same</span>
 
 <span class="c1"># main procedure</span>
 <span class="k">def</span> <span class="nf">question1</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
@@ -11813,9 +11808,11 @@ div#notebook {
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">True</span>
     
-    <span class="k">if</span> <span class="n">is_anagram</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">True</span>
-    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)):</span>
+        <span class="n">substring</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))]</span> <span class="c1"># get all substrings with the length of t</span>
+        <span class="k">if</span> <span class="n">is_anagram</span><span class="p">(</span><span class="n">substring</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">True</span>
+
     <span class="k">return</span> <span class="bp">False</span>
 </pre></div>
 
@@ -11835,11 +11832,11 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[71]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">s1</span> <span class="o">=</span> <span class="s2">&quot;udacity&quot;</span>
-<span class="n">t1</span> <span class="o">=</span> <span class="s2">&quot;ad&quot;</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="s2">&quot;ay&quot;</span>
 <span class="n">question1</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">t1</span><span class="p">)</span>
 </pre></div>
 
@@ -11851,11 +11848,11 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[2]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[71]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>True</pre>
+<pre>False</pre>
 </div>
 
 </div>
@@ -11866,7 +11863,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[72]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">t2</span> <span class="o">=</span> <span class="s2">&quot;cityuda&quot;</span>
@@ -11881,7 +11878,7 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[3]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[72]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -11905,7 +11902,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[73]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Empty string for anagram</span>
@@ -11921,7 +11918,7 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[4]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[73]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -11936,7 +11933,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[74]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Null anagram</span>
@@ -11952,7 +11949,7 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[5]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[74]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -11976,7 +11973,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[75]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
@@ -11998,7 +11995,7 @@ div#notebook {
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>False
 
-This took 0.00000000 seconds
+This took 0.00100017 seconds
 
 </pre>
 </div>
@@ -12010,7 +12007,7 @@ This took 0.00000000 seconds
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[76]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
@@ -12043,41 +12040,6 @@ This took 0.00099993 seconds
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="n">s3</span> <span class="o">=</span> <span class="s2">&quot;udacity&quot;</span><span class="o">*</span><span class="mi">1000</span>
-<span class="n">t7</span> <span class="o">=</span> <span class="s2">&quot;ad&quot;</span><span class="o">*</span><span class="mi">1000</span>
-
-<span class="k">print</span> <span class="n">question1</span><span class="p">(</span><span class="n">s3</span><span class="p">,</span> <span class="n">t7</span><span class="p">)</span>
-<span class="k">print</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">This took </span><span class="si">%.8f</span><span class="s2"> seconds</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>True
-
-This took 0.12500000 seconds
-
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12086,14 +12048,15 @@ This took 0.12500000 seconds
 <h2 id="Explanation:">Explanation:<a class="anchor-link" href="#Explanation:">&#182;</a></h2><p>My choice of the data structure to solve this question is list, which was treated as indexed array.</p>
 <h3 id="Space-complexity:">Space complexity:<a class="anchor-link" href="#Space-complexity:">&#182;</a></h3><ol>
 <li>for some odd cases, the main procedure returns error message. It does not need to go through the rest of codes; O(1)</li>
-<li>'is_anagram' procedure creates 's_list' and 't_list'. s_list takes space of the length (S) of 's' and 't_list' takes space of the length (T) of 't';O(S) + O(T)</li>
+<li>'is_anagram' procedure creates 't1_list' and 't2_list'. t1_list and t2_list take space of the length (T) of 't';O(2T)</li>
+<li>the main procedure creates 'substring', which take space of the length (S) of 's'; O(S)</li>
 </ol>
-<p>Overall, the space complexity of the worst case would be O(S+T).</p>
+<p>Overall procedure would take O(S+2T) space. But, after dropping constants, the space complexity of the worst case would be O(S+T).</p>
 <h3 id="Time-efficiency:">Time efficiency:<a class="anchor-link" href="#Time-efficiency:">&#182;</a></h3><ol>
-<li>the main procedure does not have any iteration; O(1)</li>
-<li>"is_anagram" procedure has array.lower function, list(array) function, and for-loop. The functions would rely on the input lengths (S and T). The two functions take O(S) time and O(T) time of each and the for-loop takes O(T) time; O(2S) + O(3T)</li>
+<li>the main procedure has one for-loop which changes time with the length of 's'; O(S) </li>
+<li>"is_anagram" procedure has array.lower function, list(array) function, and array.sort() function. The time of the functions would rely on the input length (T) and it takes two arguments with the same length; O(3T*2)</li>
 </ol>
-<p>Overall procedure would take O(2S+3T) time. But, after dropping constants, the time complexity of the worst case would be O(S+T).</p>
+<p>Overall procedure would take O(S+6T) time. But, after dropping constants, the time complexity of the worst case would be O(S+T).</p>
 <hr>
 <h1 id="Question-2.">Question 2.<a class="anchor-link" href="#Question-2.">&#182;</a></h1><p>Given a string a, find the longest palindromic substring contained in a. Your function definition should look like question2(a), and return a string.</p>
 <h2 id="Understand-the-Question:">Understand the Question:<a class="anchor-link" href="#Understand-the-Question:">&#182;</a></h2><p><a href="https://en.wikipedia.org/wiki/Palindrome">A palindrome</a> is a word, phrase, number, or other sequence of characters which reads the same backward as forward, such as madam or racecar. And the question is to answer longest palindromic substring. For example, the procedure with the input of 'ababa' will return 'ababa', not 'aba'.</p>
