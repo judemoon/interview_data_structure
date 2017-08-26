@@ -12093,7 +12093,7 @@ This took 0.12500000 seconds
 <li>the main procedure does not have any iteration; O(1)</li>
 <li>"is_anagram" procedure has array.lower function, list(array) function, and for-loop. The functions would rely on the input lengths (S and T). The two functions take O(S) time and O(T) time of each and the for-loop takes O(T) time; O(2S) + O(3T)</li>
 </ol>
-<p>Overall, the time complexity of the worst case would be O(2S+3T).</p>
+<p>Overall procedure would take O(2S+3T) time. But, after dropping constants, the time complexity of the worst case would be O(S+T).</p>
 <hr>
 <h1 id="Question-2.">Question 2.<a class="anchor-link" href="#Question-2.">&#182;</a></h1><p>Given a string a, find the longest palindromic substring contained in a. Your function definition should look like question2(a), and return a string.</p>
 <h2 id="Understand-the-Question:">Understand the Question:<a class="anchor-link" href="#Understand-the-Question:">&#182;</a></h2><p><a href="https://en.wikipedia.org/wiki/Palindrome">A palindrome</a> is a word, phrase, number, or other sequence of characters which reads the same backward as forward, such as madam or racecar. And the question is to answer longest palindromic substring. For example, the procedure with the input of 'ababa' will return 'ababa', not 'aba'.</p>
@@ -12433,12 +12433,12 @@ This took 229.60400009 seconds
 <li>for some odd cases, the main procedure returns error message. It does not need to go through the rest of codes; O(1)</li>
 <li>'longest_palindrome' procedure creates 'longest' and 'substring', which both take space of the length (A) of 'a'; O(2A)</li>
 </ol>
-<p>Overall, the space complexity of the worst case would be O(2A).</p>
+<p>Overall procedure would take O(2A) space. But after dropping constant, the space complexity of the worst case would be O(A).</p>
 <h3 id="Time-efficiency:">Time efficiency:<a class="anchor-link" href="#Time-efficiency:">&#182;</a></h3><ol>
 <li>the main procedure does not have any iteration, but creates one output; O(1)</li>
 <li>"longest_palindrome" procedure has array.lower function and two for-loops. The function takes O(A) time and the for-loops take O(A<sup>2</sup>) time.</li>
 </ol>
-<p>Overall, the time complexity of the worst case would be O(A<sup>2</sup> + A).</p>
+<p>Overall procedure would take O(A<sup>2</sup> + A) time. But after dropping non-dominate term, the time complexity of the worst case would be O(A<sup>2</sup>).</p>
 <hr>
 <h1 id="Question-3.">Question 3.<a class="anchor-link" href="#Question-3.">&#182;</a></h1><p>Given an undirected graph G, find the minimum spanning tree within G. A minimum spanning tree connects all vertices in a graph with the smallest possible total weight of edges. Your function should take in and return an adjacency list structured like this:</p>
 <blockquote><p>{'A': [('B', 2)],</p>
@@ -12823,7 +12823,7 @@ This took 0.00199986 seconds
 <li>step1 in the main procedure creates elements for 'parent' and 'rank' lists; O(2V)</li>
 <li>'find_root' and 'union' procedures do not create new variables.</li>
 </ol>
-<p>Overall, the space complexity of the worst case would be O(V*E + 3V + 2E).</p>
+<p>Overall procedure would take O(V*E + 3V + 2E) space. But after dropping constants, the space complexity of the worst case would be O(V*E + V + E).</p>
 <h3 id="Time-efficiency:">Time efficiency:<a class="anchor-link" href="#Time-efficiency:">&#182;</a></h3><ol>
 <li>the main procedure has dictionary.keys() function, sorted(array) function, three single for-loops and one double for-loops. <ul>
 <li>dictionary.keys() function; O(V)</li>
@@ -12836,7 +12836,7 @@ This took 0.00199986 seconds
 </li>
 <li>'find_root' and 'union' procedures do not include iterations.</li>
 </ol>
-<p>Overall, the time complexity of the worst case would be O(V<sup>2</sup> + 2V + 3E).</p>
+<p>Overall procedure would take O(V<sup>2</sup> + 2V + 3E) time. But after dropping non-dominate terms and constants, the time complexity of the worst case would be O(V<sup>2</sup> + E).</p>
 <hr>
 <h1 id="Question-4.">Question 4.<a class="anchor-link" href="#Question-4.">&#182;</a></h1><p>Find the least common ancestor between two nodes on a binary search tree. The least common ancestor is the farthest node from the root that is an ancestor of both nodes. For example, the root is a common ancestor of all nodes on the tree, but if both nodes are descendents of the root's left child, then that left child might be the lowest common ancestor. You can assume that both nodes are in the tree, and the tree itself adheres to all BST properties. The function definition should look like question4(T, r, n1, n2), where T is the tree represented as a matrix, where the index of the list is equal to the integer stored in that node and a 1 represents a child node, r is a non-negative integer representing the root, and n1 and n2 are non-negative integers representing the two nodes in no particular order. For example, one test case might be</p>
 <blockquote><p>question4(</p>
@@ -13276,14 +13276,14 @@ This took 0.00099993 seconds
 <li>in 'get_parent' procedure, it returns 'i'; O(1)</li>
 <li>in 'common_ancestor' procedure, it returns 'n2_parent'; O(1)</li>
 </ol>
-<p>The constant space would not change with the input size, so the space complexity would only take account of 'get_history' procedure. In the main procedure, it creates two lists by using 'get_history'. Overall the space complexity of the worst case would be O(2T)</p>
+<p>The constant space would not change with the input size, so the space complexity would only take account of 'get_history' procedure. In the main procedure, it creates two lists by using 'get_history'. Overall procedure would take O(2T) space. But after dropping constant, the space complexity of the worst case would be O(T)</p>
 <h3 id="Time-efficiency:">Time efficiency:<a class="anchor-link" href="#Time-efficiency:">&#182;</a></h3><ol>
 <li>the main procedure does not have any iteration, but creates one output; O(1)</li>
 <li>'get_history' procedure contains one while-loop which takes O(T) time</li>
 <li>'get_parent' procedure contains one for-loop which takes O(T) time</li>
 <li>'common_ancestor' procedure contains double for-loops, which take O(T<sup>2</sup>) time</li>
 </ol>
-<p>Overall, the time complexity of the worst case would be O(T<sup>2</sup> + 2T).</p>
+<p>Overall procedure would take O(T<sup>2</sup> + 2T) time. But after dropping non-dominate term, the time complexity of the worst case would be O(T<sup>2</sup>).</p>
 <hr>
 <h1 id="Question-5.">Question 5.<a class="anchor-link" href="#Question-5.">&#182;</a></h1><p>Find the element in a singly linked list that's m elements from the end. For example, if a linked list has 5 elements, the 3rd element from the end is the 3rd element. The function definition should look like question5(ll, m), where ll is the first node of a linked list and m is the "mth number from the end". You should copy/paste the Node class below to use as a representation of a node in the linked list. Return the value of the node at that position.</p>
 <blockquote><p>class Node(object):</p>
@@ -13568,7 +13568,7 @@ This took 0.00099993 seconds
 <li>each Node() takes O(1) time and so creating a tree takes O(N) time</li>
 <li>the main procedure has two while-loops. The first while-loop takes O(N) and the second while-loop takes O(N)</li>
 </ol>
-<p>Overall, the time complexity of the worst case would be O(N).</p>
+<p>Overall procedure would take O(2N) time. But after dropping constant, the time complexity of the worst case would be O(N).</p>
 
 </div>
 </div>
